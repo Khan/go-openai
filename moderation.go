@@ -124,19 +124,19 @@ type ResultCategories struct {
 
 // ResultCategoryScores represents CategoryScores of Result.
 type ResultCategoryScores struct {
-	Hate                  float32 `json:"hate"`
-	HateThreatening       float32 `json:"hate/threatening"`
-	Harassment            float32 `json:"harassment"`
-	HarassmentThreatening float32 `json:"harassment/threatening"`
-	SelfHarm              float32 `json:"self-harm"`
-	SelfHarmIntent        float32 `json:"self-harm/intent"`
-	SelfHarmInstructions  float32 `json:"self-harm/instructions"`
-	Sexual                float32 `json:"sexual"`
-	SexualMinors          float32 `json:"sexual/minors"`
-	Violence              float32 `json:"violence"`
-	ViolenceGraphic       float32 `json:"violence/graphic"`
-	Illicit               float32 `json:"illicit"`
-	IllicitViolent        float32 `json:"illicit/violent"`
+	Hate                  float64 `json:"hate"`
+	HateThreatening       float64 `json:"hate/threatening"`
+	Harassment            float64 `json:"harassment"`
+	HarassmentThreatening float64 `json:"harassment/threatening"`
+	SelfHarm              float64 `json:"self-harm"`
+	SelfHarmIntent        float64 `json:"self-harm/intent"`
+	SelfHarmInstructions  float64 `json:"self-harm/instructions"`
+	Sexual                float64 `json:"sexual"`
+	SexualMinors          float64 `json:"sexual/minors"`
+	Violence              float64 `json:"violence"`
+	ViolenceGraphic       float64 `json:"violence/graphic"`
+	Illicit               float64 `json:"illicit"`
+	IllicitViolent        float64 `json:"illicit/violent"`
 }
 
 type CategoryAppliedInputType struct {
