@@ -93,6 +93,13 @@ type ModerationRequestV2 struct {
 	Model string `json:"model,omitempty"`
 }
 
+func (m ModerationRequestV2) Convert() ModerationRequestV2 {
+	return ModerationRequestV2{
+		Input: m.Input,
+		Model: m.Model,
+	}
+}
+
 type ModerationRequestConverter interface {
 	Convert() ModerationRequestV2
 }
