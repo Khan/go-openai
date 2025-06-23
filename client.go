@@ -71,6 +71,17 @@ func NewOrgClient(authToken, org string) *Client {
 	return NewClientWithConfig(config)
 }
 
+// SetBaseURL updates the base URL for the client.
+// This allows changing the endpoint after client instantiation.
+func (c *Client) SetBaseURL(baseURL string) {
+	c.config.BaseURL = baseURL
+}
+
+// GetBaseURL returns the current base URL for the client.
+func (c *Client) GetBaseURL() string {
+	return c.config.BaseURL
+}
+
 type requestOptions struct {
 	body   any
 	header http.Header
