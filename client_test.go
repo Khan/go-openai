@@ -39,6 +39,35 @@ func TestClient(t *testing.T) {
 	}
 }
 
+func TestClient_SetBaseURL(t *testing.T) {
+	const mockToken = "mock token"
+	client := NewClient(mockToken)
+
+	// Test default base URL
+	defaultBaseURL := client.GetBaseURL()
+	if defaultBaseURL != openaiAPIURLv1 {
+		t.Errorf("Expected default BaseURL to be %q, got %q", openaiAPIURLv1, defaultBaseURL)
+	}
+
+	// Test setting a new base URL
+	const newBaseURL = "https://custom-api.example.com/v1"
+	client.SetBaseURL(newBaseURL)
+
+	// Verify the base URL was updated
+	updatedBaseURL := client.GetBaseURL()
+	if updatedBaseURL != newBaseURL {
+		t.Errorf("Expected BaseURL to be %q after SetBaseURL, got %q", newBaseURL, updatedBaseURL)
+	}
+
+	// Test that the updated base URL is used in fullURL method
+	suffix := "/chat/completions"
+	fullURL := client.fullURL(suffix)
+	expectedFullURL := newBaseURL + suffix
+	if fullURL != expectedFullURL {
+		t.Errorf("Expected fullURL to be %q, got %q", expectedFullURL, fullURL)
+	}
+}
+
 func TestSetCommonHeadersAnthropic(t *testing.T) {
 	config := DefaultAnthropicConfig("mock-token", "")
 	client := NewClientWithConfig(config)
