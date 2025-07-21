@@ -71,6 +71,17 @@ func NewOrgClient(authToken, org string) *Client {
 	return NewClientWithConfig(config)
 }
 
+// SetBaseURL updates the base URL for the client.
+// This allows changing the endpoint after client instantiation.
+func (c *Client) SetBaseURL(baseURL string) {
+	c.config.BaseURL = baseURL
+}
+
+// GetBaseURL returns the current base URL for the client.
+func (c *Client) GetBaseURL() string {
+	return c.config.BaseURL
+}
+
 type requestOptions struct {
 	body   any
 	header http.Header
@@ -81,6 +92,20 @@ type requestOption func(*requestOptions)
 func withBody(body any) requestOption {
 	return func(args *requestOptions) {
 		args.body = body
+	}
+}
+
+func withExtraBody(extraBody map[string]any) requestOption {
+	return func(args *requestOptions) {
+		// Assert that args.body is a map[string]any.
+		bodyMap, ok := args.body.(map[string]any)
+		if ok {
+			// If it's a map[string]any then only add extraBody
+			// fields to args.body otherwise keep only fields in request struct.
+			for key, value := range extraBody {
+				bodyMap[key] = value
+			}
+		}
 	}
 }
 
